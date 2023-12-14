@@ -255,16 +255,16 @@ ISR(USART1_RX_vect){
 	_usart_rcv=UDR1;
 	if(decode==0 && _usart_rcv==STX){
 		decode=1;
-		}else if(decode==1){
-			_command=_usart_rcv;
-			decode=2;
-		}else if(decode==2){
-			_command_data=_usart_rcv;
-			decode=3;
-		}else if(decode==3){
+	}else if(decode==1){
+		_command=_usart_rcv;
+		decode=2;
+	}else if(decode==2){
+		_command_data=_usart_rcv;
+		decode=3;
+	}else if(decode==3){
 		if(_usart_rcv==ETX){
 			sint_flag=1;
-			}else{
+		}else{
 			Printf("RXerror\n");
 		}
 		decode=0;

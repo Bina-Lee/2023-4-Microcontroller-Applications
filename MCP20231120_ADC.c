@@ -16,7 +16,7 @@
 #define OFF 0
 int on_off=0;
 
-int current=0;
+int current_buzzer=0;
 
 void play(unsigned int y){
 	DDRB |= 0x02;
@@ -38,7 +38,7 @@ ISR(INT0_vect){
 	EIFR |=(0x01);
 	sei();
 	current++;
-	if(current>6)current=6;
+	if(current_buzzer>6)current_buzzer=6;
 	_delay_ms(100);
 }
 
@@ -47,7 +47,7 @@ ISR(INT1_vect){
 	EIFR |=(0x02);
 	sei();
 	current--;
-	if(current<0)current=0;
+	if(current_buzzer<0)current_buzzer=0;
 	_delay_ms(100);
 }
 
@@ -94,7 +94,7 @@ int main(void)
     while (1) 
     {
 		if(on_off==ON){
-			play(note_freq[current]);
+			play(note_freq[current_buzzer]);
 		}
 		else{
 			stop();
